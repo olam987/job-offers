@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div>
+    <canvas id="myChart"></canvas>
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        fetch('http://localhost:8080/api')
+            .then(r => r.json())
+            .then(data => {
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: Object.keys(data),
+                        datasets: [{
+                            label: 'Ilość wystąpień Technologii',
+                            data: Object.values(data),
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            })
+
+
+    </script>
+
+</div>
+</body>
+</html>
