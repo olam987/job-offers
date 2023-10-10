@@ -1,0 +1,24 @@
+const ctx = document.getElementById("myChart");
+
+        fetch('http://localhost:8080/api')
+            .then(r => r.json())
+            .then(data => {
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: Object.keys(data),
+                        datasets: [{
+                            label: 'Ilość wystąpień Technologii',
+                            data: Object.values(data),
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                })
+            })
